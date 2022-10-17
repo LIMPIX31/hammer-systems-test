@@ -1,12 +1,14 @@
 import {Table} from "antd"
 import useSWR from 'swr'
 import {LoadingOutlined} from "@ant-design/icons"
+import {NavLink} from "react-router-dom"
 
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    key: 'name'
+    key: 'name',
+    render: (text, { id }) => <NavLink to={'/app/settings/user/' + id}>{text}</NavLink>
   },
   {
     title: 'Email',
