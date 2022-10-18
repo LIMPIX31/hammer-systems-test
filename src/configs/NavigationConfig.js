@@ -13,6 +13,12 @@ const dashBoardNavTree = [
         submenu: []
       },
       {
+        key: 'general-planner',
+        title: 'Планировщик',
+        path: `${APP_PREFIX_PATH}/planner`,
+        submenu: []
+      },
+      {
         key: 'general-catalog',
         title: 'Каталог',
         breadcrumb: true,

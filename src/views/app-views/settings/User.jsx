@@ -1,23 +1,33 @@
 import {useHistory, useParams} from "react-router-dom"
 import useSWR from "swr"
-import {Button, Col, DatePicker, Form, Input, Row} from "antd"
-import {useCallback, useState} from "react"
+import {Button, Col, DatePicker, Form, Input, Row, message} from "antd"
+import {useCallback} from "react"
 import {LoadingOutlined} from "@ant-design/icons"
 
 export const UserSettings = () => {
-  const { replace: redirect } = useHistory()
-  const { id } = useParams()
+  const {replace: redirect} = useHistory()
+  const {id} = useParams()
 
-  const { data: { name, email, username, website, phone, address: { city, street, zipcode } = {} } = {} } = useSWR('https://jsonplaceholder.typicode.com/users/' + id, url => fetch(url).then(r => r.json()))
-
-  const [submitting, setSubmitting] = useState(false)
+  const {
+    data: {
+      name,
+      email,
+      username,
+      website,
+      phone,
+      address: {city, street, zipcode} = {}
+    } = {}
+  } = useSWR('https://jsonplaceholder.typicode.com/users/' + id, url => fetch(url).then(r => r.json()))
 
   const submit = useCallback(data => {
-    setSubmitting(true)
-    setTimeout(() => redirect('/app/clients/list'), 1000)
+    message.loading({ content: 'Updating :]', key: 'nots?' })
+    setTimeout(() => {
+      redirect('/app/clients/list')
+      message.success({ content: 'Done 😜', key: 'nots?', duration: 2 })
+    }, 1000)
   })
 
-  return !submitting && name ? (
+  return name ? (
     <div className="mt-4">
       <Form
         name="basicInformation"
@@ -50,7 +60,7 @@ export const UserSettings = () => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -64,7 +74,7 @@ export const UserSettings = () => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -77,7 +87,7 @@ export const UserSettings = () => {
                     message: 'Please enter a valid email!'
                   }]}
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -93,7 +103,7 @@ export const UserSettings = () => {
                   label="Phone Number"
                   name="phoneNumber"
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -101,7 +111,7 @@ export const UserSettings = () => {
                   label="Website"
                   name="website"
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={24}>
@@ -109,7 +119,7 @@ export const UserSettings = () => {
                   label="Address"
                   name="address"
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -117,7 +127,7 @@ export const UserSettings = () => {
                   label="City"
                   name="city"
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={12}>
@@ -125,7 +135,7 @@ export const UserSettings = () => {
                   label="Post code"
                   name="postcode"
                 >
-                  <Input />
+                  <Input/>
                 </Form.Item>
               </Col>
             </Row>
