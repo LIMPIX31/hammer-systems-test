@@ -20,7 +20,6 @@ const El = ({onClick, onPlaced, children, startPos}) => {
 }
 
 export const Planner = () => {
-  // No Typescript = No love for the project
   const [items, setItems] = useState([])
 
   const addItem = useCallback((title) => {
